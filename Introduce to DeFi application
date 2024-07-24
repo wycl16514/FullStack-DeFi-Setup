@@ -36,4 +36,21 @@ We will going to do the following projects at this course:
 
 3, Crypto-trading smart contract
 
-4, 
+4, Liquidity management frontend with web3
+
+5, Token swappping frontend wit web3
+
+6, Working with native tokens
+
+7, Smart contracts and frontend for staking and farming
+
+8, Asset pool smart contract for crypto loan and its frontend
+
+9. Price oracle for crypto load.
+
+The basic architecture of DeFi application is like following:
+
+
+
+![architecture of DeFi](https://github.com/user-attachments/assets/e0ab6c9b-db5f-4027-bdea-590033519e64)
+
