@@ -1,0 +1,39 @@
+After the birth of bitcoin with decentralized system blockchain behide it, There is a new specy called decentralized finance(DeFi) which casues huge shock for human society especially in the field of finance. Lookt at the price
+for one bitcoin now, it height as 66076.90 dollar at this time! Such crypto money mapping to no real thing in the real world and its just severy bytes on the net, and why people believe it worth at the given price? We don't care
+the economics theory and sociology behide it, we just know it is a huge wave of furtune then we need to find a skateboard to surf on it as quickly as possible or it is a train driving the the land of wealth then we need to get
+a ticket and jump on it.
+
+Different people wit different background would find different ways. Since I am a software developer then I need to find a way that can leverage my skills. What skill I can use as a leverage to jump on the train, of course is
+coding something related to it. Before we build something heavily related to DeFi let's have some know how about Defi.
+
+DeFi is highly tied with blockchain and actually it is a kind of uaseg of blockchain in the field of finace. It plays roles you can find from finance of the real world. The main chracteristics of it is, it is not controled by
+any real entity like banks or goverment. That means we can build digital banks, exchange without any bosses look over them and such digital entities will controlled by not one but the rules behide it. The second notice is it 
+is much more transparent thant its conuterparts at the real world, you can see how transactions are made and nearly every details related to that transaction. The third is its openness, Defi removes barries like bouders, races，
+and ensures everyone can access service globally and seamlessly. The fourth is autonomy， people fully control their own assets and no one can put their hand between you and your money just like those banks did. Finally is it is
+anonymous, you appear on the net by a chunk of string or numbers, no one can ever know who you are and that's why DeFi is used to do some bad things like money laundering.
+
+We need to know some buzz words related to tech of Defi such as ERC-20, liquidity orcale, TVL, APY:
+
+ERC-20 is a standard for fungible tokens(oppsite to NFT), it is a set of rules for certain types of smart contract. Simply put it, fugible token has the same value for different entities such 1 bitcoin at Jim's pocket is the 
+same as one value for Alice's pocket( NFT would not). The smart contract used to build such objects will following a standardize interfaces for approve, transfer and get balance. 
+
+Liquidity is a new concept related to our developers. It just like reserved different currencies in the bank, then we can trade one kind of currency with the other. In DeFi application liquidity describes whether users can buy and sell asset through a trading market. And liquidity pool is  a place to hold liquidity for people to trade assets, in tech, it is a specific smart contract that holds some amount of cryptococrrency then people can trade them.
+
+Oracle, it is not the database but a kind of way to allow smart contracts on the blockchain to access infomation outsize of the blockchain. it is services provided by third-party,one example is code library smart contract need 
+to call to finish some funcionality, such as random number generator, or quering the whether info about some places.
+
+TVL, total value locked, it just like the money need to reserved by a bank which is requirement from regualtor. TVL defines the total assets being deposited in a DeFi protocol. It is the total assets hold by all smart contracts
+that running behide the DeFi application. Just like a bank has 1m dollors and 2m euros , and assume 2m euros worth of 2.5m dollars then the TVL of the bank is 3.5m dollors.
+
+APY(annual percentage yield), and APR(annual percentage rate), We can build a bank by blockchain, then APY means the rate of return when user deposite their cryptocurrency on you site, just like the deposite rate from a real
+bank, APR sums up all rates from every earning cycle through a year.
+
+We will going to do the following projects at this course:
+
+1, Interacting with smart contract and DeFi wallets in the frontend
+
+2, Decentralized exchanges
+
+3, Crypto-trading smart contract
+
+4, 
