@@ -33,4 +33,38 @@ Then run:
 ```js
 npx hardhat
 ```
-In the console we just click return or input y
+Then Select "Create a Javascript project", which you can just click return:
+
+
+<img width="572" alt="截屏2024-07-25 23 51 44" src="https://github.com/user-attachments/assets/04b1e81e-ffce-48d2-ac86-4c261c572249">
+
+Then it will ask to set the hardhat project root, which we can click return, the following steps will just click return would be ok. Then open vscode and drag the project folder into
+it, and open hardhat.config.js for editing:
+
+![截屏2024-07-26 00 04 19](https://github.com/user-attachments/assets/cccb2f7e-a48c-4fdc-b640-65f70218b664)
+
+put the code like following:
+```js
+require("@nomicfoundation/hardhat-toolbox");
+
+/** @type import('hardhat/config').HardhatUserConfig */
+module.exports = {
+  solidity: "0.8.24",
+  paths: {
+    sources: "./src/backend/contracts",
+    artifacts: "./src/backend/artifacts",
+    cache: "./src/backend/cache",
+    tests: "./src/backend/test"
+  }
+};
+```
+The sources field tell hardhat where to find the source files of solidity, the artifacts point to the directory where hardhat can put the result of compiling sources of solidity,
+cache used to save internal files for hardhat, and tests will save test cases specially for smart contract, then we need to create folder at places showed in the paths field:
+```js
+mkdir -p src/backend/contracts
+mkdir -p src/backend/artifacts
+mkdir -p src/backend/cache    
+mkdir -p src/backend/test
+```
+Then remove the folder of "contracts" and "test" at the project root which are created by Hardhat. Now we are ready to deploy smart contract.
+
