@@ -4,7 +4,9 @@ on the framework OpenZeppelin, it can reduce our workload and provide security e
 ```js
 npm install @openzeppelin/contracts
 ```
+
 Then we create our first contract in /src/backend/contracts with name "SimpleDeFiToken.sol" and have following code:
+
 ```sol
 // SPDX-License-Identifier: MIT
 
@@ -34,13 +36,17 @@ ERC20, which is used to create coins with number of "1e24", now you just like Fe
 the instance of the contract, it just like an ID number or bank account, when methods of the contract is called, we can use "msg.sender" to identify who is calling the contract.
 
 Now we can compile the code using following command:
+
 ```js
 npx hardhat compile
 ```
+
 If running successful, you will see something like following:
+
 ```js
 Compiled 6 Solidity files successfully (evm target: paris).
 ```
+
 This indicates the compiling is ok. Notices it generates several files because we import Solidity files from OpenZeppelin, and the compiling results are saved at the artifacts 
 directory we setup in hardhat.config.js. Then let's check the compiling result to gain deeper understanding to the structure of Solidity.
 
