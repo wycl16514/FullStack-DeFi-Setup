@@ -67,7 +67,9 @@ mkdir -p src/backend/cache
 mkdir -p src/backend/test
 ```
 Then remove the folder of "contracts" and "test" at the project root which are created by Hardhat. Now we are ready to deploy smart contract. Now we can think about how to compiling
-and deploying smart contract in local environment, of course all these will rely on hardhat. When we first write smart contract, we don't need to do it from scratch, we always rely 
+and deploying smart contract in local environment, of course all these will rely on hardhat. 
+
+When we first write smart contract, we don't need to do it from scratch, we always rely 
 on the framework OpenZeppelin, it can reduce our workload and provide security enhancement for our contract, let's install it first:
 
 ```js
@@ -111,6 +113,19 @@ If running successful, you will see something like following:
 Compiled 6 Solidity files successfully (evm target: paris).
 ```
 This indicates the compiling is ok. Notices it generates several files because we import Solidity files from OpenZeppelin, and the compiling results are saved at the artifacts 
-directory we setup in hardhat.config.js.
+directory we setup in hardhat.config.js. Then let's check the compiling result to gain deeper understanding to the structure of Solidity.
+
+The First two important concepts for solidity is bytecode and ABI, lets go to the artifacts folder and look at the SimpleDeFiToken.json, and search for field name of "bytecode":
+
+![截屏2024-07-26 16 16 07](https://github.com/user-attachments/assets/417de499-1465-4656-b8e4-a0b073ab29d1)
+
+Bytecode of solidity is just the same as bytecode of java or assembly for complied result of c/c++, it can by run by EVM a virtual machine. And the ABI field contains infor about how
+to call method in solidity contract by using js, it tells to js how to access members of the smart contract correctly, if the member of contract with modifier "private" or "internal",
+which means you can't access them directly from oursize, this is the same as "private" or "protected" in c++ and java.
+
+
+![截屏2024-07-26 16 22 09](https://github.com/user-attachments/assets/197c2546-c6e6-419e-a07c-eb233eb5ab3f)
+
+If we want to run 
 
 
