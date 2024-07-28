@@ -92,5 +92,107 @@ npx hardhat test
 ```
 Then you will get following result:
 
-
 ![截屏2024-07-28 14 51 12](https://github.com/user-attachments/assets/a1f9becc-ead3-4634-8ee1-abf372d24864)
+
+Let's go to create the second test which is transfering some fund from the deployer which is Account#0 to other which is Account#1:
+```js
+it("should transfer token from one to other", async () => {
+        expect(await token.balanceOf(deployer.address)).to.equal(toWei(1000000))
+        await token.connect(deployer).transfer(user1.address, toWei(5))
+        expect(await token.balanceOf(user1.address)).to.equal(toWei(5))
+        expect(await token.balanceOf(deployer.address)).to.equal(toWei(999995))
+    })
+```
+In the test case aboved, we first check the balance of deployer, then transfer five coins(5 wei) to user1, and make sure 5 coin is reduce from the balance of deployer and 5 coin is increased in the account of user1. As we 
+can see the token.connect, this is setting the caller for the following contract methods which is the msg.sender. Here is a homework, try to connect user1 instead of deplyer and send 5 coins to user2 and see what happend.
+And we need to make sure when error happens in the transaction, then we can revert the transaction and prevent fund lossing:
+```js
+ it("should revert for transaction fail", async () => {
+        await token.connect(deployer).transfer(user1.address, toWei(5))
+        try {
+            await token.connect(user1).transfer(user2.address, toWei(10))
+        } catch (err) {
+            console.log("err: ", err)
+            expect(await token.balanceOf(user1.address)).to.equal(toWei(5))
+        }
+    })
+```
+
+Comparing with python or java, the smart contract written by solidity is diffcult to debugged. We can't set breakpoints and stop at the line with breakpoint and check the state of the program, we can only debugging by printing
+some message, let's see how to do it, we first define a new function in the contract as following:
+```js
+function transferWithAutoBurn(address to, uint256 amount) public {
+        /*
+        Destroy given amount of money of the sender and send the remaining
+        to other
+        */
+        require(balanceOf(msg.sender) >= amount, "Not enough tokens");
+        uint256 burnAmount = amount / 10;
+        //provided by openzeppelin
+        //there is a bug for the call
+        _burn(to, burnAmount);
+        //transfer remainning fund to other
+        transfer(to, amount - burnAmount);
+    }
+```
+Don't worry if you don't fully understand aboved code we will dive deep into solidity in later section. Remember to deploy the contract after chaning it,  And we add a test case for it:
+```js
+it("should burn the right amount of transferWithAutoBurn", async () => {
+        await token.connect(deployer).transfer(user1.address, toWei(1))
+        await token.connect(user1).transferWithAutoBurn(user2.address, toWei(1))
+    })
+```
+Then run the test you will get error like following:
+
+![截屏2024-07-28 16 44 25](https://github.com/user-attachments/assets/10bc550d-e994-48f6-af9c-7225555eace3)
+
+When something wrong happend, since we can't set breakpoints and stop the programm, then we need to print info to help us debugging,and hardhat provides console.log to help us print important info for debugging, and we can 
+change the code in the contract as following:
+```js
+...
+import "hardhat/console.sol";
+...
+ function transferWithAutoBurn(address to, uint256 amount) public {
+        /*
+        Destroy given amount of money of the sender and send the remaining
+        to other
+        */
+        require(balanceOf(msg.sender) >= amount, "Not enough tokens");
+        uint256 burnAmount = amount / 10;
+        console.log("Buring %s from %s, balance is %s", 
+        burnAmount, to, balanceOf(to))
+        //provided by openzeppelin
+        //there is a bug for the call
+        _burn(to, burnAmount);
+        //transfer remainning fund to other
+        transfer(to, amount - burnAmount);
+    }
+```
+Remember to recompile and redeploy after changing to the contract. Then run the test again and you will see the following:
+
+![截屏2024-07-28 16 52 05](https://github.com/user-attachments/assets/7d9dac10-57a0-4d59-8627-8ae4c79bb921)
+
+As you can see from aboved, after buring the balance of the account is 0 which is no fund left for transfer, the expection is there is some amount left, then by looking into the details we found we burn the wrong guy, we should
+burn to the caller of this method which is msg.sender instead of the recipient, such kind of bug is desaster for smart contract which lead to destroying a huge amount of assets, therefore we can fix the bug as:
+```js
+ function transferWithAutoBurn(address to, uint256 amount) public {
+        /*
+        Destroy given amount of money of the sender and send the remaining
+        to other
+        */
+        require(balanceOf(msg.sender) >= amount, "Not enough tokens");
+        uint256 burnAmount = amount / 10;
+        // console.log(
+        //     "Buring %s from %s, balance is %s",
+        //     burnAmount,
+        //     to,
+        //     balanceOf(to)
+        // );
+        //provided by openzeppelin
+        //there is a bug for the call
+        //_burn(to, burnAmount);
+        _burn(msg.sender, burnAmount);
+        //transfer remainning fund to other
+        transfer(to, amount - burnAmount);
+    }
+```
