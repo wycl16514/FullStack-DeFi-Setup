@@ -1,0 +1,10 @@
+.exit
+exit
+await contract.totalSupply()
+await contract.symbol()
+await contract.name()
+contract.target
+const contract = await ethers.getContractAt("SimpleDeFiToken", "0x5FbDB2315678afecb367f032d93F642f64180aa3")
+.exit
+const contract = await ethers.getContractAt("SimpleDeFiToken", "0x5FbDB2315678afecb367f032d93F642f64180aa3")
+const contract = await ehters.getContractAt("SimpleDeFiToken", "0x5FbDB2315678afecb367f032d93F642f64180aa3")
